@@ -4,8 +4,6 @@ import 'package:resume_task/model.dart';
 import 'package:resume_task/widget/custom_button.dart';
 import 'package:resume_task/widget/custom_text_field.dart';
 
-
-
 class CreateResumeView extends StatefulWidget {
   bool isEditScreen;
   final ResumeItem? resumeItem;
@@ -19,7 +17,7 @@ class CreateResumeView extends StatefulWidget {
   final String? edutcation;
   final String? experiance;
   final String? position;
-  final String?projects;
+  final String? projects;
 
   CreateResumeView({
     this.projects,
@@ -56,10 +54,10 @@ class _CreateResumeViewState extends State<CreateResumeView> {
   @override
   void initState() {
     super.initState();
-    initilizeController(); // Call the initialization method here
+    initController();
   }
 
-  void initilizeController() {
+  void initController() {
     skillsController = TextEditingController(text: widget.skills);
     titleController = TextEditingController(text: widget.title);
     emailController = TextEditingController(text: widget.email);
@@ -78,7 +76,9 @@ class _CreateResumeViewState extends State<CreateResumeView> {
         appBar: AppBar(
           backgroundColor: Colors.blue,
           title: Text(
-              widget.isEditScreen == false ? 'Create Resume' : 'Edit Resume',style: TextStyle(color: Colors.white),),
+            widget.isEditScreen == false ? 'Create Resume' : 'Edit Resume',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -126,7 +126,8 @@ class _CreateResumeViewState extends State<CreateResumeView> {
                   controller: projectsController!,
                 ),
                 SizedBox(height: 16.0),
-                CustomButton(textColor: Colors.white,
+                CustomButton(
+                    textColor: Colors.white,
                     buttonColor: Colors.blue,
                     onTap: () {
                       createResume();
