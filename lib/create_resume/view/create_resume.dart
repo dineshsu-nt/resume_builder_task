@@ -6,7 +6,7 @@ import 'package:resume_task/widget/custom_text_field.dart';
 
 class CreateResumeView extends StatefulWidget {
   bool isEditScreen;
-  final ResumeItem? resumeItem;
+  final ResumeModel? resumeItem;
   final String? docId;
   final String? title;
   final String? description;
@@ -142,56 +142,24 @@ class _CreateResumeViewState extends State<CreateResumeView> {
   void createResume() async {
     final CollectionReference resumeCollection =
         FirebaseFirestore.instance.collection('resumes');
-    final title = titleController?.text;
-    final email = emailController?.text;
-    final phone = phoneController?.text;
-    final address = addressController?.text;
-    final description = descriptionController?.text;
-    final skills = skillsController?.text;
-    final position = positionController?.text;
-    final experience = experianceController?.text;
-    final education = educationController?.text;
-    final projects = projectsController?.text;
 
-    final result = ResumeItem(
-      projects: projects,
-      title: title,
-      email: email,
-      phoneNumber: phone,
-      address: address,
-      description: description,
-      skills: skills,
-      position: position,
-      experience: experience,
-      education: education,
+    final result = ResumeModel(
+      projects: projectsController?.text,
+      title: titleController?.text,
+      email: emailController?.text,
+      phoneNumber: phoneController?.text,
+      address: addressController?.text,
+      description: descriptionController?.text,
+      skills: skillsController?.text,
+      position: positionController?.text,
+      experience: experianceController?.text,
+      education: educationController?.text,
     );
 
     if (widget.isEditScreen) {
-      await resumeCollection.doc(widget.docId).update({
-        "title": result.title,
-        'email': result.email,
-        'phoneNumber': result.phoneNumber,
-        'address': result.address,
-        'description': result.description,
-        'skills': result.skills,
-        'position': result.position,
-        'experience': result.experience,
-        'education': result.education,
-        "projects": result.projects,
-      });
+      await resumeCollection.doc(widget.docId).update(result.toJson());
     } else {
-      await resumeCollection.add({
-        "title": result.title,
-        'email': result.email,
-        'phoneNumber': result.phoneNumber,
-        'address': result.address,
-        'description': result.description,
-        'skills': result.skills,
-        'position': result.position,
-        'experience': result.experience,
-        'education': result.education,
-        "projects": result.projects,
-      });
+      await resumeCollection.add(result.toJson());
     }
 
     Navigator.pop(context, result);
