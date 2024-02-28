@@ -14,7 +14,7 @@ class CreateResumeView extends StatefulWidget {
   final String? skills;
   final String? email;
   final String? phoneNumber;
-  final String? edutcation;
+  final String? education;
   final String? experiance;
   final String? position;
   final String? projects;
@@ -31,7 +31,7 @@ class CreateResumeView extends StatefulWidget {
     this.skills,
     this.resumeItem,
     this.position,
-    this.edutcation,
+    this.education,
     this.experiance,
   });
 
@@ -65,7 +65,7 @@ class _CreateResumeViewState extends State<CreateResumeView> {
     addressController = TextEditingController(text: widget.address);
     descriptionController = TextEditingController(text: widget.description);
     positionController = TextEditingController(text: widget.position);
-    educationController = TextEditingController(text: widget.edutcation);
+    educationController = TextEditingController(text: widget.education);
     experianceController = TextEditingController(text: widget.experiance);
     projectsController = TextEditingController(text: widget.projects);
   }
