@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "580000711382",
+    "project_id": "resume-task",
+    "storage_bucket": "resume-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580000711382:android:235002574093816746bf77",
+        "android_client_info": {
+          "package_name": "com.example.resume_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLuOG8c4NXBJS0e4dlICDCPpKj4mt-Yv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
