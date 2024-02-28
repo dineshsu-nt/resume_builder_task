@@ -53,6 +53,24 @@ class _CreateResumeViewState extends State<CreateResumeView> {
   TextEditingController? experianceController;
   TextEditingController? projectsController;
 
+  @override
+  void initState() {
+    super.initState();
+    initilizeController(); // Call the initialization method here
+  }
+
+  void initilizeController() {
+    skillsController = TextEditingController(text: widget.skills);
+    titleController = TextEditingController(text: widget.title);
+    emailController = TextEditingController(text: widget.email);
+    phoneController = TextEditingController(text: widget.phoneNumber);
+    addressController = TextEditingController(text: widget.address);
+    descriptionController = TextEditingController(text: widget.description);
+    positionController = TextEditingController(text: widget.position);
+    educationController = TextEditingController(text: widget.edutcation);
+    experianceController = TextEditingController(text: widget.experiance);
+    projectsController = TextEditingController(text: widget.projects);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +129,7 @@ class _CreateResumeViewState extends State<CreateResumeView> {
                 CustomButton(textColor: Colors.white,
                     buttonColor: Colors.blue,
                     onTap: () {
-
+                      createResume();
                     },
                     buttonText: "Save"),
               ],
@@ -120,5 +138,61 @@ class _CreateResumeViewState extends State<CreateResumeView> {
         ));
   }
 
+  void createResume() async {
+    final CollectionReference resumeCollection =
+        FirebaseFirestore.instance.collection('resumes');
+    final title = titleController?.text;
+    final email = emailController?.text;
+    final phone = phoneController?.text;
+    final address = addressController?.text;
+    final description = descriptionController?.text;
+    final skills = skillsController?.text;
+    final position = positionController?.text;
+    final experience = experianceController?.text;
+    final education = educationController?.text;
+    final projects = projectsController?.text;
 
+    final result = ResumeItem(
+      projects: projects,
+      title: title,
+      email: email,
+      phoneNumber: phone,
+      address: address,
+      description: description,
+      skills: skills,
+      position: position,
+      experience: experience,
+      education: education,
+    );
+
+    if (widget.isEditScreen) {
+      await resumeCollection.doc(widget.docId).update({
+        "title": result.title,
+        'email': result.email,
+        'phoneNumber': result.phoneNumber,
+        'address': result.address,
+        'description': result.description,
+        'skills': result.skills,
+        'position': result.position,
+        'experience': result.experience,
+        'education': result.education,
+        "projects": result.projects,
+      });
+    } else {
+      await resumeCollection.add({
+        "title": result.title,
+        'email': result.email,
+        'phoneNumber': result.phoneNumber,
+        'address': result.address,
+        'description': result.description,
+        'skills': result.skills,
+        'position': result.position,
+        'experience': result.experience,
+        'education': result.education,
+        "projects": result.projects,
+      });
+    }
+
+    Navigator.pop(context, result);
+  }
 }
